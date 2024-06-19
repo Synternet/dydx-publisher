@@ -6,7 +6,7 @@ import (
 
 	"github.com/nats-io/nats.go"
 	"github.com/spf13/cobra"
-	"github.com/syntropynet/data-layer-sdk/pkg/options"
+	"github.com/synternet/data-layer-sdk/pkg/options"
 )
 
 var (

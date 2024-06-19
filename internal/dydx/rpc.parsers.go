@@ -9,7 +9,7 @@ import (
 	banktypes "github.com/cosmos/cosmos-sdk/x/bank/types"
 	IBCTypes "github.com/cosmos/ibc-go/v7/modules/apps/transfer/types"
 	ibctransfertypes "github.com/cosmos/ibc-go/v7/modules/apps/transfer/types"
-	"gitlab.com/syntropynet/amberdm/publisher/dydx-publisher/pkg/types"
+	"github.com/synternet/dydx-publisher/pkg/types"
 	"log"
 	"strings"
 

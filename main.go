@@ -1,9 +1,9 @@
 package main
 
 import (
-	_ "github.com/syntropynet/data-layer-sdk/pkg/dotenv"
+	_ "github.com/synternet/data-layer-sdk/pkg/dotenv"
 
-	"gitlab.com/syntropynet/amberdm/publisher/dydx-publisher/cmd"
+	"github.com/synternet/dydx-publisher/cmd"
 )
 
 func main() {

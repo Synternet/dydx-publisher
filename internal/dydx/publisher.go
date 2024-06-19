@@ -2,15 +2,16 @@ package dydx
 
 import (
 	"context"
+	"encoding/json"
 	"errors"
 	"fmt"
 	"log"
 	"sync/atomic"
 	"time"
 
-	"github.com/syntropynet/data-layer-sdk/pkg/options"
-	"github.com/syntropynet/data-layer-sdk/pkg/service"
-	"gitlab.com/syntropynet/amberdm/publisher/dydx-publisher/pkg/types"
+	"github.com/synternet/data-layer-sdk/pkg/options"
+	"github.com/synternet/data-layer-sdk/pkg/service"
+	"github.com/synternet/dydx-publisher/pkg/types"
 )
 
 type Publisher struct {
@@ -51,8 +52,9 @@ func (p *Publisher) Start() context.Context {
 	p.rpc.Subscribe(
 		p.Context,
 		func(msg any, suffixes ...string) error {
+			msgBytes, _ := json.Marshal(msg)
 			p.publishedMessages.Add(1)
-			return p.Publish(msg, suffixes...)
+			return p.PublishBuf(msgBytes, suffixes...)
 		},
 		func(err error) {
 			log.Println("Publisher failed: ", err.Error())
@@ -108,9 +110,9 @@ func (p *Publisher) Close() error {
 	return errors.Join(err...)
 }
 
-func (p *Publisher) getStatus() map[string]any {
-	return map[string]any{
-		"mempool.txs": p.mempoolMessages.Swap(0),
-		"published":   p.publishedMessages.Swap(0),
+func (p *Publisher) getStatus() map[string]string {
+	return map[string]string{
+		"mempool_txs": string(p.mempoolMessages.Swap(0)),
+		"published":   string(p.publishedMessages.Swap(0)),
 	}
 }

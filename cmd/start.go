@@ -2,13 +2,13 @@ package cmd
 
 import (
 	"context"
-	"gitlab.com/syntropynet/amberdm/publisher/dydx-publisher/internal/dydx"
+	"github.com/synternet/dydx-publisher/internal/dydx"
 	"log"
 	"os"
 	"os/signal"
 
 	"github.com/spf13/cobra"
-	"github.com/syntropynet/data-layer-sdk/pkg/service"
+	"github.com/synternet/data-layer-sdk/pkg/service"
 )
 
 var (

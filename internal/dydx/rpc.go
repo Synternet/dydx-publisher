@@ -11,7 +11,7 @@ import (
 
 	IBCTypes "github.com/cosmos/ibc-go/v7/modules/apps/transfer/types"
 	"github.com/dydxprotocol/v4-chain/protocol/app"
-	"gitlab.com/syntropynet/amberdm/publisher/dydx-publisher/pkg/types"
+	"github.com/synternet/dydx-publisher/pkg/types"
 	"golang.org/x/sync/errgroup"
 
 	tmlog "github.com/cometbft/cometbft/libs/log"
@@ -169,26 +169,22 @@ func (c *rpc) Mempool() ([]*types.Transaction, error) {
 	return txs, nil
 }
 
-func (p *rpc) getStatus() map[string]any {
+func (p *rpc) getStatus() map[string]string {
 	queueSize := p.queueMaxSize.Swap(0)
 	if queueSize > p.maxQueueSize {
 		p.maxQueueSize = queueSize
 	}
 
-	return map[string]any{
-		"ibc": map[string]any{
-			"tokens":       len(p.ibcTraceCache),
-			"cache_misses": p.ibcMisses.Load(),
-		},
-		"blocks": p.blockCounter.Swap(0),
-		"txs":    p.txCounter.Swap(0),
-		"errors": p.errCounter.Swap(0),
-		"events": map[string]any{
-			"total":     p.evtCounter.Swap(0),
-			"other":     p.evtOtherCounter.Swap(0),
-			"skipped":   p.evtSkipCounter.Load(),
-			"queue":     queueSize,
-			"max_queue": p.maxQueueSize,
-		},
+	return map[string]string{
+		"ibc_tokens":       string(len(p.ibcTraceCache)),
+		"ibc_cache_misses": string(p.ibcMisses.Load()),
+		"blocks":           string(p.blockCounter.Swap(0)),
+		"txs":              string(p.txCounter.Swap(0)),
+		"errors":           string(p.errCounter.Swap(0)),
+		"event_total":      string(p.evtCounter.Swap(0)),
+		"event_other":      string(p.evtOtherCounter.Swap(0)),
+		"event_skipped":    string(p.evtSkipCounter.Load()),
+		"event_queue":      string(queueSize),
+		"event_max_queue":  string(p.maxQueueSize),
 	}
 }

@@ -1,5 +1,7 @@
 package types
 
+import "google.golang.org/protobuf/reflect/protoreflect"
+
 type Transaction struct {
 	Nonce           string `json:"nonce"`
 	Raw             string `json:"raw"`
@@ -19,3 +21,5 @@ type Block struct {
 type Mempool struct {
 	Transactions []*Transaction `json:"txs"`
 }
+
+func (*Mempool) ProtoReflect() protoreflect.Message { return nil }
