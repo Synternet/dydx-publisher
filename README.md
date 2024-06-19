@@ -28,8 +28,6 @@ Running executable with flags.
   --prefix my-org \
   --nats-nkey SA..BC \
   --nats-jwt eyJ0e...aW \
-  --db-host db.sqlite \
-  --db-name sqlite
   start \
   --app-api http://localhost:1317 \
   --grpc-api localhost:9090 \
@@ -48,8 +46,6 @@ NATS_URL=nats://dal-broker
 PREFIX=my-org
 NATS_NKEY=SA..BC
 NATS_JWT=eyJ0e...aW
-DB_HOST=db.sqlite
-DB_NAME=sqlite
 APP_API=http://localhost:1317
 GRPC_API=localhost:9090
 TENDERMINT_API=tcp://localhost:26657

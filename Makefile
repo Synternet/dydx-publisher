@@ -2,10 +2,10 @@ NATS_SERVER=34.107.87.29
 
 # Define the paths to the source code and build artifacts
 SRC_PATH=.
-DIST_PATH=./dist
 BUILD_PATH=./build
-DOCKERFILE_PROD=$(BUILD_PATH)/Dockerfile
-DOCKERFILE_DEV=$(BUILD_PATH)/Dockerfile.dev
+DOCKER_PATH=./docker
+DOCKERFILE_PROD=$(DOCKER_PATH)/Dockerfile
+DOCKERFILE_DEV=$(DOCKER_PATH)/Dockerfile.dev
 
 # Define the name of the binary and Docker image
 BINARY_NAME=dydx-publisher
@@ -18,7 +18,9 @@ BUILD_FLAGS=-ldflags="-s -w"
 TEST_CMD=go test -race ./...
 
 # Define the command for running the development version
-DEV_CMD=go run github.com/itohio/xnotify@v0.3.1 -i .env -i internal -i pkg -i cmd --batch 100 --verbose --trigger -- make build-debug -- $(DIST_PATH)/$(BINARY_NAME) --verbose $(ARGS)
+DEV_CMD=go run github.com/itohio/xnotify@v0.3.1 -i .env -i internal -i pkg -i cmd --batch 100 --verbose --trigger -- make build-debug -- $(BUILD_PATH)/$(BINARY_NAME) --verbose $(ARGS)
+
+CGO_ENABLED?=1
 
 .PHONY: all
 all: build
@@ -31,12 +33,12 @@ gen:
 .PHONY: build
 build:
 	# Build the production binary
-	CGO_ENABLED=1 go build $(BUILD_FLAGS) -o $(DIST_PATH)/$(BINARY_NAME) $(SRC_PATH)
+	CGO_ENABLED=$(CGO_ENABLED) go build $(BUILD_FLAGS) -o $(BUILD_PATH)/$(BINARY_NAME) $(SRC_PATH)
 
 .PHONY: build-debug
 build-debug:
 	# Build the debug binary
-	go build -o $(DIST_PATH)/$(BINARY_NAME) $(SRC_PATH)
+	go build -o $(BUILD_PATH)/$(BINARY_NAME) $(SRC_PATH)
 
 .PHONY: test
 test:
@@ -60,14 +62,14 @@ docker-build-dev:
 .PHONY: clean
 clean:
 	# Remove the build artifacts
-	rm -rf $(DIST_PATH)
+	rm -rf $(BUILD_PATH)
 
 .PHONY: all-tests
 all-tests: test docker-build
 
 .PHONY: monitor
 monitor:
-	nats --server $(NATS_SERVER) --creds ../nats.creds sub "syntropy.dydx.>" | awk 'BEGIN { RS="\\n\\[#"; ORS="" } /Received on "syntropy.kava.telemetry"/ { block = 1; next } /^$/ { block = 0; next } !block'
+	nats --server $(NATS_SERVER) --creds ../nats.creds sub "synternet.dydx.>" | awk 'BEGIN { RS="\\n\\[#"; ORS="" } /Received on "synternet.dydx.telemetry"/ { block = 1; next } /^$/ { block = 0; next } !block'
 
 
 .PHONY: help
