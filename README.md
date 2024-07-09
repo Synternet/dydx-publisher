@@ -20,7 +20,35 @@ Getting usage help.
 ./build/dydx-publisher --help
 ```
 
-Running executable with flags.
+## Required variables:
+To enable the publishing features, you must set the following environment variables before starting the `dydx` publisher. These variables configure the NATS connection and define the publishing settings:
+
+- **NATS URL**  
+  `NATS_URL=nats://dal-broker`
+
+- **NATS NKey**  
+  `NATS_NKEY=SA..BC`
+
+- **NATS JWT**  
+  `NATS_JWT=eyJ0e...aW`
+
+- **Publisher Prefix**
+  `PUB_PREFIX=my-org`
+
+- **Publisher Name**
+  `PUB_NAME=dydx`
+
+- **Application API Endpoint**
+  `APP_API=http://localhost:1317`
+
+- **gRPC API Endpoint**
+  `GRPC_API=localhost:9090`
+
+- **Tendermint API Endpoint**
+  `TENDERMINT_API=tcp://localhost:26657`
+
+
+ Running executable with flags.
 
 ```bash
 ./build/dydx-publisher \
@@ -35,7 +63,7 @@ Running executable with flags.
   --publisher-name dydx
 ```
 
-Running executable with environment variables. Environment variables are automatically attempted to be loaded from `.env` file.
+ Running executable with environment variables. Environment variables are automatically attempted to be loaded from `.env` file.
 Any flag can be used as environment variables by updating flag to be `UPPERCASE` words separated by `_` (e.g.: flag `nats-nkey` == env var `NATS_NKEY`).
 
 ```bash
