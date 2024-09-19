@@ -15,7 +15,7 @@ RUN go mod download
 COPY . /home/src
 
 # Build the application. Disable CGO and enable static binary output.
-RUN CGO_ENABLED=0 go build -v -o dydx-publisher -ldflags="-w -s"
+RUN CGO_ENABLED=1 go build -v -o dydx-publisher -ldflags="-w -s"
 
 # 2. Runtime Container
 FROM alpine as dydx-publisher
