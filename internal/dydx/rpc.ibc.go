@@ -6,7 +6,7 @@ import (
 	"time"
 
 	"github.com/cosmos/cosmos-sdk/types/query"
-	IBCTypes "github.com/cosmos/ibc-go/v7/modules/apps/transfer/types"
+	IBCTypes "github.com/cosmos/ibc-go/v8/modules/apps/transfer/types"
 )
 
 func (c *rpc) GetDenomTrace(denomStr string) (IBCTypes.DenomTrace, error) {

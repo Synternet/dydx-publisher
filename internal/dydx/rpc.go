@@ -9,7 +9,7 @@ import (
 	"sync/atomic"
 	"time"
 
-	IBCTypes "github.com/cosmos/ibc-go/v7/modules/apps/transfer/types"
+	IBCTypes "github.com/cosmos/ibc-go/v8/modules/apps/transfer/types"
 	"github.com/dydxprotocol/v4-chain/protocol/app"
 	"github.com/synternet/dydx-publisher/pkg/types"
 	"golang.org/x/sync/errgroup"
