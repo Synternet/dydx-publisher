@@ -1,5 +1,5 @@
 # 1. Build Container
-FROM golang:1.21 AS build
+FROM golang:1.22 AS build
 
 # Set build arguments
 ARG VERSION
