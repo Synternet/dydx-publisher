@@ -286,7 +286,9 @@ replace (
 )
 
 replace (
+
 	cosmossdk.io/client/v2 => github.com/cosmos/cosmos-sdk/client/v2 v2.0.0-beta.1.0.20240219091002-18ea4c520045
+	cosmossdk.io/core => cosmossdk.io/core v0.11.0
 
 	// Use dYdX fork of CometBFT
 	github.com/cometbft/cometbft => github.com/dydxprotocol/cometbft v0.38.6-0.20240426214049-c8beeeada40a
