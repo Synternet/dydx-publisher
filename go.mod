@@ -277,7 +277,11 @@ require (
 replace (
 	cosmossdk.io/store => github.com/dydxprotocol/cosmos-sdk/store v1.0.3-0.20240326192503-dd116391188d
 	cosmossdk.io/x/upgrade => cosmossdk.io/x/upgrade v0.1.1
+	github.com/cosmos/iavl => github.com/dydxprotocol/iavl v1.1.1-0.20240509161911-1c8b8e787e85
 	github.com/cosmos/ibc-go/v8 => github.com/cosmos/ibc-go/v8 v8.0.0
+	github.com/google/pprof => github.com/google/pprof v0.0.0-20230228050547-1710fef4ab10
+	github.com/prometheus/client_golang => github.com/prometheus/client_golang v1.18.0
+	github.com/prometheus/common => github.com/prometheus/common v0.47.0
 
 )
 
