@@ -18,20 +18,7 @@ COPY . /home/src
 RUN CGO_ENABLED=1 go build -v -o dydx-publisher -ldflags="-w -s"
 
 # 2. Runtime Container
-FROM alpine as dydx-publisher
-
-# Set environment variables
-ENV TZ=Europe/Vilnius \
-    PATH="/home/app:${PATH}"
-
-# Install necessary packages
-RUN apk add --update --no-cache \
-    tzdata \
-    ca-certificates \
-    bash \
-    && \
-    cp --remove-destination /usr/share/zoneinfo/${TZ} /etc/localtime && \
-    echo "${TZ}" > /etc/timezone
+FROM golang:1.22 as dydx-publisher
 
 # Set working directory
 WORKDIR /home/app
